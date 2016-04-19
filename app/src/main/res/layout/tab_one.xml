@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:banner="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/tab1_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:context="com.example.larry.myapplication.MainActivity">
+
+
+  <!--          <TextView
+                android:id="@+id/tab1_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text=" WELCOME !     2015 12 23"
+                android:textSize="33dp" />-->
+
+            <com.example.larry.myapplication.banner.SimpleImageBanner
+                android:id="@+id/sib_simple_usage"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                banner:bb_scale="0.5625" />
+
+
+            <!--下面放置精选推荐等栏目-->
+
+            <FrameLayout
+                android:id="@+id/tab_one_frame_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/tab_one_frame_zone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></FrameLayout>
+
+
+            <FrameLayout
+                android:id="@+id/tab_one_frame_two"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></FrameLayout>
+
+
+            <FrameLayout
+                android:id="@+id/tab_one_frame_three"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/tab_one_frame_four"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/tab_one_frame_five"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/tab_one_frame_six"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/tab_one_frame_seven"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/tab_one_frame_eight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></FrameLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

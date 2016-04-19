@@ -1,0 +1,123 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.larry.myapplication.page.ClassifyFragment">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+                <TextView
+                    android:id="@+id/title1"
+                    android:layout_alignParentTop="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="父母学院"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:id="@+id/column1"
+                    android:layout_below="@+id/title1"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:id="@+id/no1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/a1" />
+
+                    <ImageView
+                        android:id="@+id/no2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/a2" />
+                </LinearLayout>
+
+
+
+
+                <TextView
+                    android:id="@+id/title2"
+                    android:layout_below="@+id/column1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="亲子乐园"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:id="@+id/column2"
+                    android:layout_below="@+id/title2"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/no3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/a3" />
+
+                    <ImageView
+                        android:id="@+id/no4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/a4" />
+
+                    <ImageView
+                        android:id="@+id/no5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/a5" />
+
+                </LinearLayout>
+
+            <LinearLayout
+                android:layout_below="@+id/column2"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:orientation="horizontal">
+
+
+                <ImageView
+                    android:id="@+id/no6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/a6" />
+
+                <ImageView
+                    android:id="@+id/no7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/a7" />
+                <ImageView
+                    android:id="@+id/no8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/a8" />
+            </LinearLayout>
+
+        </RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>

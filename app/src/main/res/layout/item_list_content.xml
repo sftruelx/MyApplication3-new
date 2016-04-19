@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:orientation="vertical"
+    android:padding="1dp">
+<!--歌曲播放列表-->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/item_image"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/uamp_ic_play_arrow_white_24dp"
+                android:tint="@color/bisque"
+                android:tintMode="src_in" />
+
+
+
+            <TextView
+                android:id="@+id/content"
+                android:layout_toRightOf="@+id/item_image"
+                android:layout_centerVertical="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_margin="5dp"
+                android:textSize="12dp"
+                android:textAppearance="?attr/textAppearanceListItem" />
+            <TextView
+                android:id="@+id/item_time"
+                android:layout_toLeftOf="@+id/download"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="25dp"
+                android:textSize="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+<!--            <ImageView
+                android:id="@+id/favor"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="6dp"
+                android:layout_toLeftOf="@+id/download"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_star_off"
+                android:tint="@color/bisque"
+                android:tintMode="src_in" />-->
+            <ImageView
+                android:id="@+id/download"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_action_download"
+                android:tint="@color/bisque"
+                android:tintMode="src_in" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#d9d9d9" />
+</LinearLayout>
