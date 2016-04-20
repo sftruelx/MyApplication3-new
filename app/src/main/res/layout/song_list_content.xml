@@ -30,7 +30,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="3dp"
-                android:textAppearance="?attr/textAppearanceLargePopupMenu"
                 android:textSize="16dp"
                 android:textStyle="bold" />
 
