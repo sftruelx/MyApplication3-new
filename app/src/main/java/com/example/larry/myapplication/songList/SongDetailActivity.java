@@ -55,7 +55,8 @@ public class SongDetailActivity extends MyActivity {
         if (appBarLayout != null) {
             appBarLayout.setTitle(album.getAlbumName());
         }
-
+        Toolbar tool = (Toolbar) findViewById(R.id.detail_toolbar);
+        setSupportActionBar(tool);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
