@@ -25,12 +25,16 @@ import android.widget.TextView;
 
 import com.example.larry.myapplication.R;
 import com.example.larry.myapplication.entity.Album;
+import com.example.larry.myapplication.entity.Artist;
 import com.example.larry.myapplication.media.ConstMsg;
+import com.example.larry.myapplication.utils.Mp3FileFilter;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
+/**我的下载播放页面
  * An activity representing a single Item detail screen. This
  * activity is only used narrow width devices. On tablet-size devices,
  * item details are presented side-by-side with a list of items
@@ -40,13 +44,23 @@ public class ItemDetailActivity extends AppCompatActivity {
     ImageView image;
     private int color;
     Bitmap bitmap;
+    ArrayList<Artist> list = new ArrayList<Artist>();
     private CollapsingToolbarLayout toolbar;
     private TextView txt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_download_detail);
-        File fileName =  ((File)getIntent().getExtras().get(ItemDetailFragment.ARG_ITEM_ID));
+        File songDir =  ((File)getIntent().getExtras().get(ItemDetailFragment.ARG_ITEM_ID));
+        File[] fileList = songDir.listFiles(new Mp3FileFilter());
+        if(fileList != null){
+            for(File f: fileList){
+                Artist artist = new Artist();
+                artist.setArtistName(f.getName());
+                artist.setArtistPath(f.getAbsolutePath());
+                list.add(artist);
+            }
+        }
         byte [] bis=this.getIntent().getByteArrayExtra("bitmap");
         bitmap = BitmapFactory.decodeByteArray(bis, 0, bis.length);
 
@@ -70,6 +84,7 @@ public class ItemDetailActivity extends AppCompatActivity {
             Bundle arguments = new Bundle();
             arguments.putString(ItemDetailFragment.ARG_ITEM_ID,
                     ((File)getIntent().getExtras().get(ItemDetailFragment.ARG_ITEM_ID)).getAbsolutePath());
+
             ItemDetailFragment fragment = new ItemDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()

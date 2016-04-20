@@ -1,0 +1,2 @@
+include ':FlycoBanner_Lib', ':app', ':volleylibrary'
+project(':volleylibrary').projectDir = new File('library')

@@ -114,7 +114,7 @@ public class TabOneFragment extends ProgressFragment implements Receiver<DataMod
             case 65:
                 try {
                     if (result.code() > 0) {
-                        getFragmentManager().beginTransaction().add(R.id.tab_one_frame_one, PicTextFragment.newInstance("必读经典", result.getAlbum())).commit();
+                        getFragmentManager().beginTransaction().add(R.id.tab_one_frame_one, PicTextFragment.newInstance("必读经典", 65, result.getAlbum())).commit();
                        }
                     setContentShown(true);
                 } catch (Exception e) {
@@ -124,7 +124,7 @@ public class TabOneFragment extends ProgressFragment implements Receiver<DataMod
             case 64:
                 try {
                     if (result.code() > 0) {
-                        getFragmentManager().beginTransaction().add(R.id.tab_one_frame_zone, PicTextFragment.newInstance("编辑推荐", result.getAlbum())).commit();
+                        getFragmentManager().beginTransaction().add(R.id.tab_one_frame_zone, PicTextFragment.newInstance("编辑推荐", 64, result.getAlbum())).commit();
                     }
                     setContentShown(true);
                 } catch (Exception e) {
@@ -134,7 +134,7 @@ public class TabOneFragment extends ProgressFragment implements Receiver<DataMod
             case 66:
                 try {
                     if (result.code() > 0) {
-                        getFragmentManager().beginTransaction().add(R.id.tab_one_frame_two, PicTextFragment.newInstance("家长课堂", result.getAlbum())).commit();
+                        getFragmentManager().beginTransaction().add(R.id.tab_one_frame_two, PicTextFragment.newInstance("家长课堂",66, result.getAlbum())).commit();
                     }
                     setContentShown(true);
                 } catch (Exception e) {
@@ -144,7 +144,7 @@ public class TabOneFragment extends ProgressFragment implements Receiver<DataMod
             case 67:
                 try {
                     if (result.code() > 0) {
-                        getFragmentManager().beginTransaction().add(R.id.tab_one_frame_three, PicTextFragment.newInstance("儿童歌曲", result.getAlbum())).commit();
+                        getFragmentManager().beginTransaction().add(R.id.tab_one_frame_three, PicTextFragment.newInstance("儿童歌曲",67, result.getAlbum())).commit();
                     }
                     setContentShown(true);
                 } catch (Exception e) {
@@ -154,7 +154,7 @@ public class TabOneFragment extends ProgressFragment implements Receiver<DataMod
             case 68:
                 try {
                     if (result.code() > 0) {
-                        getFragmentManager().beginTransaction().add(R.id.tab_one_frame_four, PicTextFragment.newInstance("音乐欣赏", result.getAlbum())).commit();
+                        getFragmentManager().beginTransaction().add(R.id.tab_one_frame_four, PicTextFragment.newInstance("音乐欣赏",68, result.getAlbum())).commit();
                     }
                     setContentShown(true);
                 } catch (Exception e) {
@@ -164,7 +164,7 @@ public class TabOneFragment extends ProgressFragment implements Receiver<DataMod
             case 69:
                 try {
                     if (result.code() > 0) {
-                        getFragmentManager().beginTransaction().add(R.id.tab_one_frame_five, PicTextFragment.newInstance("儿童故事", result.getAlbum())).commit();
+                        getFragmentManager().beginTransaction().add(R.id.tab_one_frame_five, PicTextFragment.newInstance("儿童故事",69, result.getAlbum())).commit();
                     }
                     setContentShown(true);
                 } catch (Exception e) {
@@ -174,7 +174,7 @@ public class TabOneFragment extends ProgressFragment implements Receiver<DataMod
             case 70:
                 try {
                     if (result.code() > 0) {
-                        getFragmentManager().beginTransaction().add(R.id.tab_one_frame_six, PicTextFragment.newInstance("国学启蒙", result.getAlbum())).commit();
+                        getFragmentManager().beginTransaction().add(R.id.tab_one_frame_six, PicTextFragment.newInstance("国学启蒙",70, result.getAlbum())).commit();
                     }
                     setContentShown(true);
                 } catch (Exception e) {
@@ -184,7 +184,7 @@ public class TabOneFragment extends ProgressFragment implements Receiver<DataMod
             case 71:
                 try {
                     if (result.code() > 0) {
-                        getFragmentManager().beginTransaction().add(R.id.tab_one_frame_seven, PicTextFragment.newInstance("英语精选", result.getAlbum())).commit();
+                        getFragmentManager().beginTransaction().add(R.id.tab_one_frame_seven, PicTextFragment.newInstance("英语精选",71, result.getAlbum())).commit();
                     }
                     setContentShown(true);
                 } catch (Exception e) {
@@ -194,7 +194,7 @@ public class TabOneFragment extends ProgressFragment implements Receiver<DataMod
             case 72:
                 try {
                     if (result.code() > 0) {
-                        getFragmentManager().beginTransaction().add(R.id.tab_one_frame_eight, PicTextFragment.newInstance("科学百科", result.getAlbum())).commit();
+                        getFragmentManager().beginTransaction().add(R.id.tab_one_frame_eight, PicTextFragment.newInstance("科学百科",72, result.getAlbum())).commit();
                     }
                     setContentShown(true);
                 } catch (Exception e) {

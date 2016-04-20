@@ -1,6 +1,7 @@
 package com.example.larry.myapplication.page.download;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -17,9 +18,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.larry.myapplication.R;
+import com.example.larry.myapplication.entity.Artist;
+import com.example.larry.myapplication.media.ConstMsg;
 import com.example.larry.myapplication.utils.FileUtils;
+import com.example.larry.myapplication.utils.LogHelper;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  * A fragment representing a single Item detail screen.
@@ -63,7 +69,14 @@ public class ItemDetailFragment extends Fragment {
             image = (ImageView)activity.findViewById(R.id.backdrop);
 
             if (appBarLayout != null) {
-                appBarLayout.setTitle(file.getName());
+                String[] fileName =file.getName().split(",");
+                if(fileName.length==0){
+                    appBarLayout.setTitle(file.getName());
+                }else{
+                    appBarLayout.setTitle(fileName[0]);
+                }
+
+//                appBarLayout.setTitle(file.getName());
 
             }
         }
@@ -160,17 +173,28 @@ public class ItemDetailFragment extends Fragment {
             holder.mImage.setImageBitmap(bitmap);*/
             holder.mContentView.setText(mValues[position].getName());
 
-          /*  holder.mView.setOnClickListener(new View.OnClickListener() {
+            holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    Context context = v.getContext();
-                    Intent intent = new Intent(context, ItemDetailActivity.class);
-                    intent.putExtra(ItemDetailFragment.ARG_ITEM_ID, holder.mItem.getAbsoluteFile());
+                  /*
+                            Intent intent = new Intent(ConstMsg.MUSICCLIENT_ACTION);
+                            intent.putExtra(ConstMsg.SONG_STATE, ConstMsg.STATE_PLAYING);
+                            ArrayList<Artist> mList = new ArrayList<Artist>();
+                            mList.add(holder.mItem);
+                            intent.putParcelableArrayListExtra(ConstMsg.ARISTLIST, mList);
+                            intent.putExtra(ConstMsg.ALBUM, album);
+                            intent.putExtra(ConstMsg.SONG_COLOR, color);
 
-                    context.startActivity(intent);
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+                            byte[] bitmapByte = baos.toByteArray();
+                            intent.putExtra(ConstMsg.SONG_ICON, bitmapByte);
+                            getActivity().sendBroadcast(intent);
+                        }
+                    });*/
                 }
-        });*/
+        });
     }
 
     @Override

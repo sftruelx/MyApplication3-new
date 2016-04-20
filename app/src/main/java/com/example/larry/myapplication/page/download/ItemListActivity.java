@@ -22,6 +22,7 @@ import com.example.larry.myapplication.R;
 import com.example.larry.myapplication.songList.SongDetailActivity;
 import com.example.larry.myapplication.utils.AppUrl;
 import com.example.larry.myapplication.utils.FileUtils;
+import com.example.larry.myapplication.utils.JpgFileFilter;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -50,7 +51,7 @@ public class ItemListActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
-    //获取文件列表
+
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -62,6 +63,7 @@ public class ItemListActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
+        //获取文件列表
         File[] files = FileUtils.getFiles(FileUtils.SDPath+ AppUrl.DIR);
         if(files != null) {
             recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(files));
@@ -72,12 +74,7 @@ public class ItemListActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
-            // This ID represents the Home or Up button. In the case of this
-            // activity, the Up button is shown. For
-            // more details, see the Navigation pattern on Android Design:
-            //
-            // http://developer.android.com/design/patterns/navigation.html#up-vs-back
-            //
+
             navigateUpTo(new Intent(this, ItemListActivity.class));
             return true;
         }
@@ -103,24 +100,18 @@ public class ItemListActivity extends AppCompatActivity {
         public void onBindViewHolder(final ViewHolder holder, int position) {
             holder.mItem = mValues[position];
 
-            File[] images = holder.mItem.listFiles(new FileFilter() {
-
-                @Override
-                public boolean accept(File pathname) {
-                    String filename = pathname.getPath();
-                    if (pathname.isDirectory())
-                        return true;
-                    if(filename.endsWith(".jpg"))
-                        return true;
-                    else
-                        return false;
-                }
-            });
+            File[] images = holder.mItem.listFiles(new JpgFileFilter());
 
             Bitmap bitmap = BitmapFactory.decodeFile(images[0].getAbsolutePath());
 
             holder.mImage.setImageBitmap(bitmap);
-            holder.mContentView.setText(mValues[position].getName());
+            String[] fileName = mValues[position].getName().split(",");
+            if(fileName.length==0){
+                holder.mContentView.setText(mValues[position].getName());
+            }else{
+                holder.mContentView.setText(fileName[0]);
+            }
+
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override

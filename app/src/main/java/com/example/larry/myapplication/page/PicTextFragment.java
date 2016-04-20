@@ -36,13 +36,14 @@ public class PicTextFragment extends Fragment {
     private ImageLoader mImageLoader;
     private static final String Frame_list = "frame_list";
     private static final String Frame_Title = "frame_title";
-    static String title = "";
-    public static PicTextFragment newInstance(String title, ArrayList<Album> albumList){
-
+    private static final String Frame_id = "frame_id";
+    private String title = "";
+    public static PicTextFragment newInstance(String title, int id, ArrayList<Album> albumList){
         PicTextFragment pt = new PicTextFragment();
         Bundle args = new Bundle();
         args.putParcelableArrayList(Frame_list, albumList);
         args.putString(Frame_Title,title);
+        args.putInt(Frame_id, id);
         pt.setArguments(args);
         return pt;
     }
@@ -68,9 +69,11 @@ public class PicTextFragment extends Fragment {
             public void onClick(View v) {
                 //弹出列表窗口
                 LogHelper.i("test",v.getTag());
+                int classifyId = getArguments().getInt(Frame_id);
+                String title = getArguments().getString(Frame_Title);
                 Intent intent = new Intent(v.getContext(), ShowListActivity.class);
-                intent.putExtra("classifyId",65);
-                intent.putExtra("title","必读经典");
+                intent.putExtra("classifyId",classifyId);
+                intent.putExtra("title",title);
                 startActivity(intent);
                 getActivity().overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
             }

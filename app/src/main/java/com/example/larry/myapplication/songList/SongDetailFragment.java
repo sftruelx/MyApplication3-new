@@ -383,7 +383,7 @@ public class SongDetailFragment extends ProgressFragment implements Receiver<Dat
                     File dd = fu.createSDDir(AppUrl.DIR);
                     LogHelper.i(TAG, dd.getAbsolutePath());
 //                    request.setDestinationInExternalFilesDir(activity, Environment.DIRECTORY_DOWNLOADS, "mydown");
-                    String dir = AppUrl.DIR+album.getAlbumName();
+                    String dir = AppUrl.DIR+album.getAlbumName()+","+ album.getAuthor() ;
                     File d = fu.createSDDir(dir);
                     String imageFile = d.getAbsolutePath()+ File.separator + "xx100.jpg";
                     LogHelper.i(TAG,imageFile);
@@ -394,7 +394,7 @@ public class SongDetailFragment extends ProgressFragment implements Receiver<Dat
                     LogHelper.i(TAG,"OK......."+ dir);
                     request.setDestinationInExternalPublicDir(dir, holder.mItem.getArtistName()+".mp3");
                     //TODO 判断是否已经下载
-                    final String mp3_name = d.getAbsolutePath()+File.separator+holder.mItem.getArtistName()+".mp3";
+                    final String mp3_name = d.getAbsolutePath()+File.separator+holder.mItem.getArtistName() +".mp3";
                     LogHelper.i(TAG,mp3_name);
                     if(fu.isFileExist(mp3_name)){
                         //    通过AlertDialog.Builder这个类来实例化我们的一个AlertDialog的对象
