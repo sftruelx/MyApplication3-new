@@ -10,18 +10,17 @@
         android:background="@color/white"
         android:layout_centerHorizontal="true"
         android:scaleType="fitXY"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
         android:src="@drawable/nomal_img" />
         <TextView
             android:id="@+id/pic_title"
             android:layout_alignBottom="@+id/pic_image1"
             android:layout_centerHorizontal="true"
             android:textSize="10dp"
-            android:padding="2dp"
             android:textColor="#ffffff"
             android:background="@color/transparent"
-            android:layout_width="100dp"
+            android:layout_width="130dp"
             android:layout_height="wrap_content" />
 
     </RelativeLayout>

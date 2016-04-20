@@ -23,11 +23,13 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.larry.myapplication.PlaybackControlsFragment;
 import com.example.larry.myapplication.R;
 import com.example.larry.myapplication.entity.Album;
 import com.example.larry.myapplication.entity.Artist;
 import com.example.larry.myapplication.media.ConstMsg;
 import com.example.larry.myapplication.utils.Mp3FileFilter;
+import com.example.larry.myapplication.utils.MyActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -40,13 +42,15 @@ import java.util.List;
  * item details are presented side-by-side with a list of items
  * in a {@link ItemListActivity}.
  */
-public class ItemDetailActivity extends AppCompatActivity {
+public class ItemDetailActivity extends MyActivity {
     ImageView image;
     private int color;
     Bitmap bitmap;
     ArrayList<Artist> list = new ArrayList<Artist>();
     private CollapsingToolbarLayout toolbar;
     private TextView txt;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,10 +62,11 @@ public class ItemDetailActivity extends AppCompatActivity {
                 Artist artist = new Artist();
                 artist.setArtistName(f.getName());
                 artist.setArtistPath(f.getAbsolutePath());
+                artist.setLocal(1);
                 list.add(artist);
             }
         }
-        byte [] bis=this.getIntent().getByteArrayExtra("bitmap");
+        byte[] bis=this.getIntent().getByteArrayExtra("bitmap");
         bitmap = BitmapFactory.decodeByteArray(bis, 0, bis.length);
 
         ImageView playImage = (ImageView) findViewById(R.id.play_image);
@@ -84,8 +89,8 @@ public class ItemDetailActivity extends AppCompatActivity {
             Bundle arguments = new Bundle();
             arguments.putString(ItemDetailFragment.ARG_ITEM_ID,
                     ((File)getIntent().getExtras().get(ItemDetailFragment.ARG_ITEM_ID)).getAbsolutePath());
-
-            ItemDetailFragment fragment = new ItemDetailFragment();
+            arguments.putByteArray(ItemDetailFragment.ARG_BYTE,bis);
+            ItemDetailFragment fragment = ItemDetailFragment.newInstance(bis);
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.frame, fragment)
@@ -109,7 +114,11 @@ public class ItemDetailActivity extends AppCompatActivity {
                 sendBroadcast(intent);*/
             }
         });
-
+        mControlsFragment = (PlaybackControlsFragment) getFragmentManager()
+                .findFragmentById(R.id.fragment_playback_controls);
+        if (mControlsFragment == null) {
+            throw new IllegalStateException("Mising fragment with id 'controls'. Cannot continue.");
+        }
         colorChange();
         applyBlur();
     }

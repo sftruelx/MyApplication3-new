@@ -17,6 +17,7 @@ public class Artist implements Parcelable {
     private Integer artistTraceLength;
     private long albumId;
     private int state = ConstMsg.STATE_NONE;
+    private int local;
 
     public Artist() {
     }
@@ -77,6 +78,14 @@ public class Artist implements Parcelable {
         this.artistTraceLength = artistTraceLength;
     }
 
+    public int getLocal() {
+        return local;
+    }
+
+    public void setLocal(int local) {
+        this.local = local;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -91,6 +100,7 @@ public class Artist implements Parcelable {
         dest.writeValue(this.artistTraceLength);
         dest.writeLong(this.albumId);
         dest.writeInt(this.state);
+        dest.writeInt(this.local);
     }
 
     protected Artist(Parcel in) {
@@ -101,6 +111,7 @@ public class Artist implements Parcelable {
         this.artistTraceLength = (Integer) in.readValue(Integer.class.getClassLoader());
         this.albumId = in.readLong();
         this.state = in.readInt();
+        this.local = in.readInt();
     }
 
     public static final Creator<Artist> CREATOR = new Creator<Artist>() {

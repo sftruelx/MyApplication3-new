@@ -131,8 +131,13 @@ public class PlaybackControlsFragment extends Fragment {
 
         if(artist != null){
             mTitle.setText(artist.getArtistName());
-            seekBar.setMax(artist.getArtistTraceLength());
-            seekBar.setProgress(duringTime);
+            if(artist.getArtistTraceLength()!=null) {
+                seekBar.setMax(artist.getArtistTraceLength());
+                seekBar.setProgress(duringTime);
+            }else{
+                seekBar.setMax(during);
+                seekBar.setProgress(duringTime);
+            }
 //            LogHelper.i(TAG,"Length = " + artist.getArtistTraceLength() + " during " + duringTime);
         }
         if(album != null){

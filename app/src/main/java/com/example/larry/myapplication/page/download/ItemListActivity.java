@@ -18,11 +18,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.larry.myapplication.PlaybackControlsFragment;
 import com.example.larry.myapplication.R;
 import com.example.larry.myapplication.songList.SongDetailActivity;
 import com.example.larry.myapplication.utils.AppUrl;
 import com.example.larry.myapplication.utils.FileUtils;
 import com.example.larry.myapplication.utils.JpgFileFilter;
+import com.example.larry.myapplication.utils.MyActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -36,7 +38,7 @@ import java.io.FileFilter;
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
-public class ItemListActivity extends AppCompatActivity {
+public class ItemListActivity extends MyActivity {
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -59,7 +61,11 @@ public class ItemListActivity extends AppCompatActivity {
         View recyclerView = findViewById(R.id.item_list);
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
-
+        mControlsFragment = (PlaybackControlsFragment) getFragmentManager()
+                .findFragmentById(R.id.fragment_playback_controls);
+        if (mControlsFragment == null) {
+            throw new IllegalStateException("Mising fragment with id 'controls'. Cannot continue.");
+        }
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {

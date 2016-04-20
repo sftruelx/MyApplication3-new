@@ -3,6 +3,7 @@ package com.example.larry.myapplication.page.download;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -18,10 +19,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.larry.myapplication.R;
+import com.example.larry.myapplication.entity.Album;
 import com.example.larry.myapplication.entity.Artist;
 import com.example.larry.myapplication.media.ConstMsg;
 import com.example.larry.myapplication.utils.FileUtils;
 import com.example.larry.myapplication.utils.LogHelper;
+import com.example.larry.myapplication.utils.Mp3FileFilter;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -39,8 +42,13 @@ public class ItemDetailFragment extends Fragment {
      * represents.
      */
     public static final String ARG_ITEM_ID = "item_id";
+    public static final String ARG_BYTE = "item_byte";
     private int color;
     private ImageView image;
+    private Bitmap bitmap;
+    private Album album;
+    ArrayList<Artist> list = new ArrayList<Artist>();
+
     /**
      * The dummy content this fragment is presenting.
      */
@@ -48,21 +56,31 @@ public class ItemDetailFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public ItemDetailFragment() {
+    public static ItemDetailFragment newInstance( byte[] bis) {
+        ItemDetailFragment sdf = new ItemDetailFragment();
+        Bundle args = new Bundle();
+        args.putByteArray(ARG_BYTE, bis);
+        sdf.setArguments(args);
+        return sdf;
     }
 
     String path = "";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        album = new Album();
+        byte[] bis = getArguments().getByteArray(ARG_BYTE);
+        bitmap = BitmapFactory.decodeByteArray(bis, 0, bis.length);
         if (getArguments().containsKey(ARG_ITEM_ID)) {
-            // Load the dummy content specified by the fragment
-            // arguments. In a real-world scenario, use a Loader
-            // to load content from a content provider.
             path = getArguments().getString(ARG_ITEM_ID);
             File file = new File(path);
-
+            for(File f : file.listFiles(new Mp3FileFilter())){
+                Artist artist = new Artist();
+                artist.setArtistName(f.getName());
+                artist.setArtistPath(f.getAbsolutePath());
+                artist.setLocal(1);
+                list.add(artist);
+            }
 
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
@@ -70,13 +88,16 @@ public class ItemDetailFragment extends Fragment {
 
             if (appBarLayout != null) {
                 String[] fileName =file.getName().split(",");
-                if(fileName.length==0){
-                    appBarLayout.setTitle(file.getName());
-                }else{
+                if(fileName.length==2){
                     appBarLayout.setTitle(fileName[0]);
+                    album.setAlbumName(fileName[0]);
+                    album.setAuthor(fileName[1]);
+                }else{
+                    appBarLayout.setTitle(file.getName());
+                    album.setAlbumName(file.getName());
                 }
 
-//                appBarLayout.setTitle(file.getName());
+
 
             }
         }
@@ -177,23 +198,21 @@ public class ItemDetailFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
 
-                  /*
-                            Intent intent = new Intent(ConstMsg.MUSICCLIENT_ACTION);
-                            intent.putExtra(ConstMsg.SONG_STATE, ConstMsg.STATE_PLAYING);
-                            ArrayList<Artist> mList = new ArrayList<Artist>();
-                            mList.add(holder.mItem);
-                            intent.putParcelableArrayListExtra(ConstMsg.ARISTLIST, mList);
-                            intent.putExtra(ConstMsg.ALBUM, album);
-                            intent.putExtra(ConstMsg.SONG_COLOR, color);
 
-                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                            bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-                            byte[] bitmapByte = baos.toByteArray();
-                            intent.putExtra(ConstMsg.SONG_ICON, bitmapByte);
-                            getActivity().sendBroadcast(intent);
-                        }
-                    });*/
+                    Intent intent = new Intent(ConstMsg.MUSICCLIENT_ACTION);
+                    intent.putExtra(ConstMsg.SONG_STATE, ConstMsg.STATE_PLAYING);
+
+                    intent.putParcelableArrayListExtra(ConstMsg.ARISTLIST, list);
+                    intent.putExtra(ConstMsg.ALBUM, album);
+                    intent.putExtra(ConstMsg.SONG_COLOR, color);
+
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+                    byte[] bitmapByte = baos.toByteArray();
+                    intent.putExtra(ConstMsg.SONG_ICON, bitmapByte);
+                    getActivity().sendBroadcast(intent);
                 }
+
         });
     }
 

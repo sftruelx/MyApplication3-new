@@ -4,34 +4,26 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.res.AssetFileDescriptor;
-import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.os.Handler;
 import android.os.IBinder;
 import android.support.v7.app.NotificationCompat;
-import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.example.larry.myapplication.MainActivity;
-import com.example.larry.myapplication.NotifactionActivity;
 import com.example.larry.myapplication.R;
-import com.example.larry.myapplication.entity.*;
 import com.example.larry.myapplication.entity.Album;
+import com.example.larry.myapplication.entity.Artist;
 import com.example.larry.myapplication.utils.AppUrl;
 import com.example.larry.myapplication.utils.LogHelper;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -225,7 +217,11 @@ public class MusicService extends Service {
                 currentPosition = 0;
                 mediaPlayer = new MediaPlayer();
                 mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                mediaPlayer.setDataSource(AppUrl.webUrl + artist.getArtistPath());
+                if(artist.getLocal()==1){
+                    mediaPlayer.setDataSource(artist.getArtistPath());
+                }else {
+                    mediaPlayer.setDataSource(AppUrl.webUrl + artist.getArtistPath());
+                }
                 mediaPlayer.prepareAsync();
                 //为mediaPlayer的完成事件创建监听器
                 mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -271,7 +267,8 @@ public class MusicService extends Service {
     private TimerTask mTimerTask;
 
     public void sendProgress() {
-        during = mediaPlayer.getDuration();
+
+        during = mediaPlayer.getDuration()/1000;
         Timer mTimer = new Timer();
         mTimerTask = new TimerTask() {
             @Override
@@ -287,7 +284,12 @@ public class MusicService extends Service {
                 if (mediaPlayer != null) {
                     if(mediaPlayer.getCurrentPosition()>0) {
                         currentPosition = Math.round(mediaPlayer.getCurrentPosition()/1000) ;
-                        notification.contentView.setProgressBar(R.id.pb, songList.get(current).getArtistTraceLength(), currentPosition, false);
+                        if(songList.get(current).getLocal() == 1)
+                        {
+                            notification.contentView.setProgressBar(R.id.pb, mediaPlayer.getDuration()/1000, currentPosition, false);
+                        }else {
+                            notification.contentView.setProgressBar(R.id.pb, songList.get(current).getArtistTraceLength(), currentPosition, false);
+                        }
                     }
                 }
                 sendBroadcastToClient(state);
