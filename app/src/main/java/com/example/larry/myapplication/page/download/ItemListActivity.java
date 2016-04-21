@@ -114,8 +114,10 @@ public class ItemListActivity extends MyActivity {
             String[] fileName = mValues[position].getName().split(",");
             if(fileName.length==0){
                 holder.mContentView.setText(mValues[position].getName());
+                holder.mAuthorView.setText("");
             }else{
                 holder.mContentView.setText(fileName[0]);
+                holder.mAuthorView.setText(fileName[1]);
             }
 
 
@@ -156,6 +158,7 @@ public class ItemListActivity extends MyActivity {
             public final View mView;
             public final ImageView mImage;
             public final TextView mContentView;
+            public final TextView mAuthorView;
             public File mItem;
 
             public ViewHolder(View view) {
@@ -163,6 +166,7 @@ public class ItemListActivity extends MyActivity {
                 mView = view;
                 mImage = (ImageView) view.findViewById(R.id.image);
                 mContentView = (TextView) view.findViewById(R.id.content);
+                mAuthorView = (TextView) view.findViewById(R.id.author);
             }
 
             @Override
