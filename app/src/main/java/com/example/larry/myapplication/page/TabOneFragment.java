@@ -101,7 +101,7 @@ public class TabOneFragment extends ProgressFragment implements Receiver<DataMod
     }
 
     private void obtainData(int type) {
-        TaskHandle handle_0 = getNetworkModule().getAlbums(type);
+        TaskHandle handle_0 = getNetworkModule().getAlbums(type,1,3);
         handle_0.setId(type);
         handle_0.setReceiver(this);
         handle_0.pullTrigger();
@@ -109,6 +109,7 @@ public class TabOneFragment extends ProgressFragment implements Receiver<DataMod
 
     @Override
     public void onSucess(TaskHandle handle, DataModule result) {
+        if(result == null) return;
         switch (handle.id()) {
 
             case 65:

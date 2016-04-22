@@ -392,9 +392,12 @@ public class SongDetailFragment extends ProgressFragment implements Receiver<Dat
                         compressAndSaveBitmapToSDCard(bitmap, imageFile);
                     }
                     LogHelper.i(TAG,"OK......."+ dir);
-                    request.setDestinationInExternalPublicDir(dir, holder.mItem.getArtistName()+".mp3");
+//                    request.setDestinationInExternalPublicDir(dir, holder.mItem.getArtistName()+".mp3");
+
                     //TODO 判断是否已经下载
+
                     final String mp3_name = d.getAbsolutePath()+File.separator+holder.mItem.getArtistName() +".mp3";
+                    request.setDestinationUri(Uri.fromFile(new File(mp3_name)));
                     LogHelper.i(TAG,mp3_name);
                     if(fu.isFileExist(mp3_name)){
                         //    通过AlertDialog.Builder这个类来实例化我们的一个AlertDialog的对象

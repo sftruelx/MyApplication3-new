@@ -25,6 +25,7 @@ import com.example.larry.myapplication.page.download.ItemListActivity;
 import com.example.larry.myapplication.page.dummy.DummyContent;
 import com.example.larry.myapplication.utils.ConfigStore;
 import com.example.larry.myapplication.utils.DeviceUuidFactory;
+import com.example.larry.myapplication.utils.FileUtils;
 import com.example.larry.myapplication.utils.LogHelper;
 import com.example.larry.myapplication.utils.MyActivity;
 
@@ -174,9 +175,11 @@ public class MainActivity extends MyActivity
     }*/
 
     /*显示点击的内容*/
-    private void showClickMessage(String message)
-    {
-        Toast.makeText(MainActivity.this, "你选择的是: "+message, Toast.LENGTH_SHORT).show();
+    private void showClickMessage(String message) {
+        FileUtils fu = new FileUtils();
+        String s  = null;
+       s = this.getApplicationContext().getExternalCacheDir().getAbsolutePath();
+        Toast.makeText(MainActivity.this, "你选择的是: "+ s, Toast.LENGTH_SHORT).show();
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

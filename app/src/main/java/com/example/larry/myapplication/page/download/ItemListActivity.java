@@ -70,7 +70,8 @@ public class ItemListActivity extends MyActivity {
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         //获取文件列表
-        File[] files = FileUtils.getFiles(FileUtils.SDPath+ AppUrl.DIR);
+        FileUtils fu = new FileUtils();
+        File[] files = FileUtils.getFiles(fu.SDPath+ AppUrl.DIR);
         if(files != null) {
             recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(files));
         }

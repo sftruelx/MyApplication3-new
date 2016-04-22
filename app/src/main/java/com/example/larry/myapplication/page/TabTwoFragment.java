@@ -38,7 +38,8 @@ public class TabTwoFragment extends ProgressFragment implements Receiver<DataMod
     SwipeRefreshLayout mSwipeLayout;
     private View mContentView;
     protected ImageLoader mImageLoader;
-
+    int page =1;
+    int classifyId;
     public static TabTwoFragment newInstance(int classifyId) {
         TabTwoFragment fragment = new TabTwoFragment();
         Bundle args = new Bundle();
@@ -83,13 +84,13 @@ public class TabTwoFragment extends ProgressFragment implements Receiver<DataMod
         // Setup text for empty content
         setEmptyText(R.string.empty);
         setContentShown(false);
-        int classifyId = getArguments().getInt("classifyId");
-        obtainData(classifyId);
+        classifyId = getArguments().getInt("classifyId");
+        obtainData(classifyId,page,20);
     }
 
 
-    private void obtainData(int type) {
-        TaskHandle handle_0 = getNetworkModule().getAlbums(type);
+    private void obtainData(int type,int page,int rows) {
+        TaskHandle handle_0 = getNetworkModule().getAlbums(type,page,rows);
         handle_0.setId(type);
         handle_0.setReceiver(this);
         handle_0.pullTrigger();
@@ -164,8 +165,8 @@ public class TabTwoFragment extends ProgressFragment implements Receiver<DataMod
 
     @Override
     public void onLoad() {
-
-        obtainData(1);
+        page++;
+        obtainData(classifyId, page, 20);
     }
 
     @Override

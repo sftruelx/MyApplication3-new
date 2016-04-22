@@ -233,10 +233,10 @@ public class NetworkModule {
 
 
     /*******************************process请求事务,根据自己的业务需求，自定义请求地址以及参数)***************************************************/
-    public TaskHandle getAlbums(int type) {
+    public TaskHandle getAlbums(int type,int page,int rows) {
         HttpRequest request = new HttpRequest(AppUrl.WEB_URL);
-        request.addParameter("page", Integer.toString(1));
-        request.addParameter("rows", Integer.toString(3));
+        request.addParameter("page", Integer.toString(page));
+        request.addParameter("rows", Integer.toString(rows));
         request.addParameter("classifyId",String.valueOf(type));
         request.setRequestTag("getAlbum");
         return center.arrange(request, myPostString);
@@ -245,7 +245,7 @@ public class NetworkModule {
     public TaskHandle getArtists(String albumId) {
         HttpRequest request = new HttpRequest(AppUrl.ARTIST_URL);
         request.addParameter("page", Integer.toString(1));
-        request.addParameter("rows", Integer.toString(3));
+        request.addParameter("rows", Integer.toString(30));
         request.addParameter("albumId",albumId);
         request.setRequestTag("getArtist");
         return center.arrange(request, myPostString);
